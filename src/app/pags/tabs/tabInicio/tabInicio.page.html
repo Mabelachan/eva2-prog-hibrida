@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Inicio
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div *ngIf="quote">
+    <h2>"{{ quote.text }}"</h2>
+    <p>- {{ quote.author }}</p>
+  </div>
+
+</ion-content>

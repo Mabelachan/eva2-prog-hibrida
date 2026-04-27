@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- FORMULARIO -->
+  <form [formGroup]="form">
+
+    <!-- FRASE -->
+    <ion-item>
+      <ion-label position="floating">Frase</ion-label>
+      <ion-input formControlName="text"></ion-input>
+    </ion-item>
+
+    <!-- ERROR FRASE -->
+    <ion-text color="danger" *ngIf="form.get('text')?.invalid && form.get('text')?.dirty">
+      <p *ngIf="form.get('text')?.errors?.['required']">
+        La frase es obligatoria
+      </p>
+      <p *ngIf="form.get('text')?.errors?.['minlength']">
+        Debe tener al menos 5 caracteres
+      </p>
+    </ion-text>
+
+    <!-- AUTOR -->
+    <ion-item>
+      <ion-label position="floating">Autor</ion-label>
+      <ion-input formControlName="author"></ion-input>
+    </ion-item>
+
+    <!-- ERROR AUTOR -->
+    <ion-text color="danger" *ngIf="form.get('author')?.invalid && form.get('author')?.dirty">
+      <p *ngIf="form.get('author')?.errors?.['required']">
+        El autor es obligatorio
+      </p>
+      <p *ngIf="form.get('author')?.errors?.['minlength']">
+        Debe tener al menos 2 caracteres
+      </p>
+    </ion-text>
+
+    <!-- BOTÓN -->
+    <ion-button expand="full" (click)="addQuote()" [disabled]="form.invalid">
+      Agregar cita
+    </ion-button>
+
+  </form>
+<!-- FIN FORMULARIO -->
+
+  <!-- LISTA -->
+  <ion-list>
+    <app-quote-item
+      *ngFor="let quote of quotes; let i = index"
+      [quote]="quote"
+      [index]="i"
+      (delete)="deleteQuote($event)">
+    </app-quote-item>
+  </ion-list>
+<!-- FIN LISTA -->
+</ion-content>
